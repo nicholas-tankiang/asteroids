@@ -7,8 +7,13 @@ def main():
 
     frames = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    player_object = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
     dt = 0
+
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+    Player.containers = (updatable, drawable)
+    
+    player_object = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     while True:
         for event in pygame.event.get():
@@ -16,9 +21,11 @@ def main():
                 return
             
         pygame.Surface.fill(screen, (0,0,0))
-        player_object.update(dt)
+        for object in updatable:
+            object.update(dt)
         # render player object
-        player_object.draw(screen)
+        for object in drawable:
+            object.draw(screen)
         # updates screen
         pygame.display.flip()
 

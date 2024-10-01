@@ -14,7 +14,7 @@ def main():
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
-    
+
     Player.containers = (updatable, drawable)
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
@@ -31,11 +31,16 @@ def main():
         pygame.Surface.fill(screen, (0,0,0))
         for object in updatable:
             object.update(dt)
-        # render player object
+        # render objects
         for object in drawable:
             object.draw(screen)
         # updates screen
         pygame.display.flip()
+        # check for collision
+        for this_asteroid in asteroids:
+            if this_asteroid.is_colliding(player_object) == True:
+                print("Game over!")
+                exit()
 
         # set to 60 fps
         dt = frames.tick(60) / 1000

@@ -16,7 +16,10 @@ def main():
                 return
             
         pygame.Surface.fill(screen, (0,0,0))
+        player_object.update(dt)
+        # render player object
         player_object.draw(screen)
+        # updates screen
         pygame.display.flip()
 
         # set to 60 fps

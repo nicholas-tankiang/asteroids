@@ -44,6 +44,10 @@ def main():
             if this_asteroid.is_colliding(player_object) == True:
                 print("Game over!")
                 exit()
+            for this_shot in shots:
+                if this_asteroid.is_colliding(this_shot) == True:
+                    this_asteroid.kill()
+                    this_shot.kill()
 
         # set to 60 fps
         dt = frames.tick(60) / 1000

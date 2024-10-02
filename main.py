@@ -46,8 +46,8 @@ def main():
                 exit()
             for this_shot in shots:
                 if this_asteroid.is_colliding(this_shot) == True:
-                    this_asteroid.kill()
                     this_shot.kill()
+                    this_asteroid.split()
 
         # set to 60 fps
         dt = frames.tick(60) / 1000
